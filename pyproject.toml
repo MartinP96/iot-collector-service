@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "iot-collector-service"
+version = "1.0.0"
+description = "Service for collecting data from IOT devices"
+authors = ["Martin Porenta <porenta.matrtin@gmail.com>"]
+readme = "README.md"
+packages = [{include = "iot_collector_service"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+paho-mqtt = "^1.6.1"
+mysql = "^0.0.3"
+
+
+[tool.poetry.group.dev.dependencies]
+radon = "^5.1.0"
+pylint = "^2.15.9"
+black = "^22.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
