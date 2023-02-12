@@ -25,9 +25,11 @@ class DataCollectorService(IDataCollectorService):
     def start_collection(self):
         self.collectors_list[0].connect_collector()
         self.collectors_list[0].run_collector()
+        print("Collector service start")
 
     def stop_collection(self):
         self.collectors_list[0].stop_collector()
+        print("Collector service stop")
 
     def get_data(self):
         return self.collectors_list[0].get_data()

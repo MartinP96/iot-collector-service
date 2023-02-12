@@ -33,7 +33,7 @@ def run_service():
     service.add_collector(collector1)
     service.start_collection()
 
-    while 1:
+    for i in range(10):
         data = service.get_data()
 
         if data["topic"] == data_topic:
@@ -42,9 +42,7 @@ def run_service():
             print(f"Timestamp: {dict_data['timestamp']}\nTemp: {dict_data['temperature']}\n"
                   f"Hum: {dict_data['humidity']}\nCO2: {dict_data['co2']}\n")
 
-    # service.start_collection()
-    # sleep(5)
-    # service.stop_collection()
+    service.stop_collection()
 
 if __name__ == '__main__':
     run_service()
