@@ -5,12 +5,6 @@ from abc import ABC, abstractmethod
 data_topic = "porenta/martin_room/air_quality/data/measurements"
 beat_topic = "porenta/martin_room/air_quality/sys/beat"
 
-class IDataCollectorService(ABC):
-    pass
-
-class DataCollectorService(IDataCollectorService):
-    pass
-
 class IDataCollector(ABC):
 
     @abstractmethod
