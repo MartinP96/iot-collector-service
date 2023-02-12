@@ -8,9 +8,14 @@ from abc import ABC, abstractmethod
 import random
 from queue import Queue
 
-class MqttClient(ABC):
+
+class IMqttClient(ABC):
     @abstractmethod
     def mqtt_client_connect(self, usr: str, password: str, broker: str, port: int):
+        pass
+
+    @abstractmethod
+    def mqtt_client_start(self):
         pass
 
     @abstractmethod
@@ -25,7 +30,12 @@ class MqttClient(ABC):
     def mqtt_client_unsubscribe(self, topic):
         pass
 
-class MqttClientPaho(MqttClient, mqttclient.Client):
+    @abstractmethod
+    def mqtt_get_data(self):
+        pass
+
+
+class MqttClientPaho(IMqttClient, mqttclient.Client):
     """
     Mqtt Client for reading and writing to mqtt broker
 
@@ -69,6 +79,9 @@ class MqttClientPaho(MqttClient, mqttclient.Client):
         # Connect to broker
         self.connect(broker, port)
 
+    def mqtt_client_start(self):
+        self.loop_start()
+
     def mqtt_client_disconnect(self):
         self.disconnect()
 
@@ -77,6 +90,9 @@ class MqttClientPaho(MqttClient, mqttclient.Client):
 
     def mqtt_client_unsubscribe(self, topic):
         self.unsubscribe(topic)
+
+    def mqtt_get_data(self):
+        return self.data_queue.get()
 
     def _on_connect_handle(self, client, userdata, flags, rc):
         if rc == 0:
@@ -88,3 +104,4 @@ class MqttClientPaho(MqttClient, mqttclient.Client):
         #print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
         data_packet = {"topic": msg.topic, "data": msg.payload.decode()}
         self.data_queue.put(data_packet)
+
