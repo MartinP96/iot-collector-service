@@ -8,7 +8,6 @@ from abc import ABC, abstractmethod
 import random
 from queue import Queue
 
-
 class IMqttClient(ABC):
     @abstractmethod
     def mqtt_client_connect(self, usr: str, password: str, broker: str, port: int):
