@@ -104,4 +104,3 @@ class MqttClientPaho(IMqttClient, mqttclient.Client):
         #print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
         data_packet = {"topic": msg.topic, "data": msg.payload.decode()}
         self.data_queue.put(data_packet)
-
