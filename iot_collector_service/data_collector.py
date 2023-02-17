@@ -31,8 +31,7 @@ class IDataCollector(ABC):
         pass
 
     @abstractmethod
-    #def connect_collector(self, usr: str, password: str, ip_addr: str, port: int):
-    def connect_collector(self):
+    def connect_collector(self) -> int:
         pass
 
     @abstractmethod
@@ -57,15 +56,20 @@ class MqttDataCollector(IDataCollector):
         self._thread_stop = False
         self.data_queue = Queue(maxsize=10)
 
-    def connect_collector(self):
-        self.client.mqtt_client_connect(
+    def connect_collector(self) -> int:
+        status = self.client.mqtt_client_connect(
             usr=self.collector_configuration.usr,
             password=self.collector_configuration.password,
             broker=self.collector_configuration.ip_addr,
             port=self.collector_configuration.port
         )
-        self.client.mqtt_client_start()
-        self.subscribe_topic()
+
+        if status == 1:
+            self.client.mqtt_client_start()
+            self.subscribe_topic()
+            return 1
+        else:
+            return -1
 
     def disconnect_collector(self):
         self.client.mqtt_client_disconnect()

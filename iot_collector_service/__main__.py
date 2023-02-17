@@ -33,7 +33,7 @@ def run_service():
     service.add_collector(collector1)
     service.start_collection()
 
-    for i in range(10):
+    for i in range(100):
         data = service.get_data()
 
         if data["topic"] == data_topic:
