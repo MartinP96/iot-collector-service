@@ -10,6 +10,7 @@ packages = [{include = "iot_collector_service"}]
 python = "^3.10"
 paho-mqtt = "^1.6.1"
 mysql = "^0.0.3"
+mysql-connector-python = "^8.0.32"
 
 
 [tool.poetry.group.dev.dependencies]
