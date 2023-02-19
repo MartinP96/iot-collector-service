@@ -13,7 +13,7 @@ class SqlClient(ABC):
         pass
 
     @abstractmethod
-    def insert_sql(self):
+    def insert_sql(self, table_name: str, column_names: list, values: list):
         pass
 
     @abstractmethod
@@ -35,17 +35,26 @@ class MySqlClient(SqlClient):
                                                       database=database,
                                                       user=user,
                                                       password=password)
+            print("Connected to SQL server")
+            return 1
 
         except mysql.connector.Error as error:
             print("Failed to connect to server: {}".format(error))
+            return -1
 
     def disconnect_sql(self):
         if self.connection.is_connected():
             self.connection.close()
             print("MySQL connection is closed")
 
-    def insert_sql(self):
-        pass
+    def insert_sql(self, table_name: str, column_names: list, values: list):
+        cursor = self.connection.cursor()
+        sql_insert_str = f"INSERT INTO {table_name} ({','.join(str(x) for x in column_names)}) " \
+                  f"VALUES ({','.join(str(x) for x in values)})"
+
+        cursor.execute(sql_insert_str)
+        self.connection.commit()
+        cursor.close()
 
     def select_sql(self):
         pass
