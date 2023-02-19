@@ -17,7 +17,7 @@ class SqlClient(ABC):
         pass
 
     @abstractmethod
-    def select_sql(self):
+    def select_sql(self, table_name: str):
         pass
 
     @abstractmethod
@@ -56,8 +56,12 @@ class MySqlClient(SqlClient):
         self.connection.commit()
         cursor.close()
 
-    def select_sql(self):
-        pass
+    def select_sql(self, table_name: str):
+        cursor = self.connection.cursor()
+        sql_select_str = f"SELECT * FROM {table_name}"
+        cursor.execute(sql_select_str)
+        myresult = cursor.fetchall()
+        return myresult
 
     def execute_stored_procedure(self):
         pass
