@@ -12,6 +12,18 @@ class SqlClient(ABC):
     def disconnect_sql(self):
         pass
 
+    @abstractmethod
+    def insert_sql(self):
+        pass
+
+    @abstractmethod
+    def select_sql(self):
+        pass
+
+    @abstractmethod
+    def execute_stored_procedure(self):
+        pass
+
 class MySqlClient(SqlClient):
 
     def __init__(self):
@@ -31,3 +43,12 @@ class MySqlClient(SqlClient):
         if self.connection.is_connected():
             self.connection.close()
             print("MySQL connection is closed")
+
+    def insert_sql(self):
+        pass
+
+    def select_sql(self):
+        pass
+
+    def execute_stored_procedure(self):
+        pass
