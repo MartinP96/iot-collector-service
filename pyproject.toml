@@ -7,8 +7,9 @@ readme = "README.md"
 packages = [{include = "iot_collector_service"}]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 paho-mqtt = "^1.6.1"
+mysql = "^0.0.3"
 
 
 [tool.poetry.group.dev.dependencies]
