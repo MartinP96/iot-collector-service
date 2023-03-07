@@ -10,7 +10,6 @@ packages = [{include = "iot_collector_service"}]
 python = "^3.9"
 paho-mqtt = "^1.6.1"
 
-
 [tool.poetry.group.dev.dependencies]
 radon = "^5.1.0"
 pylint = "^2.15.9"
