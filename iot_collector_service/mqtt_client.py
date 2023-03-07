@@ -4,11 +4,37 @@
 """
 
 from paho.mqtt import client as mqttclient
-import time
+from abc import ABC, abstractmethod
 import random
 from queue import Queue
 
-class MqttClient(mqttclient.Client):
+class IMqttClient(ABC):
+    @abstractmethod
+    def mqtt_client_connect(self, usr: str, password: str, broker: str, port: int) -> int:
+        pass
+
+    @abstractmethod
+    def mqtt_client_start(self):
+        pass
+
+    @abstractmethod
+    def mqtt_client_disconnect(self):
+        pass
+
+    @abstractmethod
+    def mqtt_client_subscribe(self, topic):
+        pass
+
+    @abstractmethod
+    def mqtt_client_unsubscribe(self, topic):
+        pass
+
+    @abstractmethod
+    def mqtt_get_data(self):
+        pass
+
+
+class MqttClientPaho(IMqttClient, mqttclient.Client):
     """
     Mqtt Client for reading and writing to mqtt broker
 
@@ -25,9 +51,6 @@ class MqttClient(mqttclient.Client):
         self._password = ""
         self.broker = ""
         self.port = 0
-        self.current_data = ""
-        self.current_data_dict = {}
-
         self.data_queue = Queue(maxsize=10)
 
     def mqtt_client_connect(self, usr: str, password: str, broker: str, port: int):
@@ -36,12 +59,6 @@ class MqttClient(mqttclient.Client):
         args: /
         return: /
         """
-        def on_connect(client, userdata, flags, rc):
-            if rc == 0:
-                print("Connected to MQTT Broker!")
-            else:
-                print("Failed to connect, return code %d\n", rc)
-
         self._usr = usr
         self._password = password
         self.broker = broker
@@ -51,13 +68,30 @@ class MqttClient(mqttclient.Client):
         # Event handles
         self.on_connect = self._on_connect_handle
         self.on_message = self._on_message_handle
+        self.on_log = self._on_log_handle
 
         # Connect to broker
-        self.connect(broker, port)
+        try:
+            self.connect(broker, port)
+            return 1
+        except Exception as sh:
+            print(sh)
+            return -1
+
+    def mqtt_client_start(self):
+        self.loop_start()
+
+    def mqtt_client_disconnect(self):
+        self.disconnect()
 
     def mqtt_client_subscribe(self, topic):
-        self.current_data_dict[topic] = ""
         self.subscribe(topic)
+
+    def mqtt_client_unsubscribe(self, topic):
+        self.unsubscribe(topic)
+
+    def mqtt_get_data(self):
+        return self.data_queue.get()
 
     def _on_connect_handle(self, client, userdata, flags, rc):
         if rc == 0:
@@ -66,8 +100,8 @@ class MqttClient(mqttclient.Client):
             print("Failed to connect, return code %d\n", rc)
 
     def _on_message_handle(self, client, userdata, msg):
-        #print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
-        self.current_data = msg.payload.decode()
-        self.current_data_dict[msg.topic] = msg.payload.decode()
         data_packet = {"topic": msg.topic, "data": msg.payload.decode()}
         self.data_queue.put(data_packet)
+
+    def _on_log_handle(self, userdata, level, buf):
+        print(buf)
