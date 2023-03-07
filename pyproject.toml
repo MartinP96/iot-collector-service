@@ -9,6 +9,7 @@ packages = [{include = "iot_collector_service"}]
 [tool.poetry.dependencies]
 python = "^3.9"
 paho-mqtt = "^1.6.1"
+mysql-connector-python = "^8.0.32"
 
 [tool.poetry.group.dev.dependencies]
 radon = "^5.1.0"
