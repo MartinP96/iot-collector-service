@@ -8,8 +8,22 @@ from .data_collector import MqttDataCollector, CollectorConfiguration
 from .mqtt_client import MqttClientPaho
 from .sql_client import  MySqlClient
 import json
+import csv
 
 def run_service():
+
+    # Read configuration from csv
+    configuration_path = "./configuration/"
+
+    # SQL configuration
+    with open(f"{configuration_path}sql_configuration.csv") as f:
+        reader = csv.DictReader(f)
+        sql_configuration_dict = next(reader)
+
+    # MQTT configuration
+    with open(f"{configuration_path}mqtt_configuration.csv") as f:
+        reader = csv.DictReader(f)
+        mqtt_configuration_dict = next(reader)
 
     # Topic definitions
     data_topic = "porenta/martin_room/air_quality/data/measurements"
@@ -20,10 +34,10 @@ def run_service():
         "beat_topic": beat_topic
     }
     conf = CollectorConfiguration(collector_name="MQTT_collector",
-                                  usr="admin",
-                                  password="admin",
-                                  ip_addr="localhost",
-                                  port=1883,
+                                  usr=mqtt_configuration_dict["user"],
+                                  password=mqtt_configuration_dict["password"],
+                                  ip_addr=mqtt_configuration_dict["broker"],
+                                  port=int(mqtt_configuration_dict["port"]),
                                   topic=topics)
 
     collector1 = MqttDataCollector(MqttClientPaho())
@@ -36,10 +50,10 @@ def run_service():
     # Define SQL client
     sql_client = MySqlClient()
     sql_client.connect_sql(
-        host="localhost",
-        database="test_db",
-        user="remote_admin",
-        password="nitram123@!"
+        host=sql_configuration_dict["host"],
+        database=sql_configuration_dict["database"],
+        user=sql_configuration_dict["user"],
+        password=sql_configuration_dict["password"]
     )
 
     # Test data collection every 10 seconds
