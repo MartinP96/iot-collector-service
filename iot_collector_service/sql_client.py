@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import mysql.connector
 from mysql.connector import Error
 
-class SqlClient(ABC):
+class ISqlClient(ABC):
 
     @abstractmethod
     def connect_sql(self, host: str, database: str, user: str, password: str):
@@ -24,7 +24,7 @@ class SqlClient(ABC):
     def execute_stored_procedure(self):
         pass
 
-class MySqlClient(SqlClient):
+class MySqlClient(ISqlClient):
 
     def __init__(self):
         self.connection = None
