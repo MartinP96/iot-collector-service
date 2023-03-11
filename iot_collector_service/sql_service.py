@@ -49,6 +49,13 @@ class SQLService(ISQLService):
         self.sql_client.disconnect_sql()
 
     def read_iot_configuration(self):
+        # Read device list
+        device_list = self.sql_client.execute_stored_procedure("GetDeviceList")
+
+        # Get topics for each device
+        for dev in device_list:
+            topic = self.sql_client.execute_stored_procedure("GetTopicsForDevice", (dev["device_id"],))
+
         pass
 
     def write_data_to_sql(self):
