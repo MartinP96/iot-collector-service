@@ -1,4 +1,7 @@
 from .sql_client import ISqlClient
+from .device_configuration import DeviceConfiguration
+from .collector_configuration import CollectorConfiguration
+
 from abc import ABC, abstractmethod
 import csv
 
@@ -16,6 +19,10 @@ class ISQLService(ABC):
 
     @abstractmethod
     def read_iot_configuration(self):
+        pass
+
+    @abstractmethod
+    def read_device_configuration(self):
         pass
 
     @abstractmethod
@@ -49,14 +56,35 @@ class SQLService(ISQLService):
         self.sql_client.disconnect_sql()
 
     def read_iot_configuration(self):
+        response = self.sql_client.execute_stored_procedure("GetIotConfiguration")
+
+        configuration = []
+        for conf in response:
+            tmp = CollectorConfiguration(
+                usr=conf["user"],
+                password=conf["password"],
+                ip_addr=conf["broker"],
+                port=conf["port"]
+            )
+
+            configuration.append(tmp)
+        return configuration
+
+    def read_device_configuration(self):
         # Read device list
         device_list = self.sql_client.execute_stored_procedure("GetDeviceList")
 
         # Get topics for each device
+        configuration = []
         for dev in device_list:
             topic = self.sql_client.execute_stored_procedure("GetTopicsForDevice", (dev["device_id"],))
-
-        pass
+            dev_configuration = DeviceConfiguration(
+                device_name=dev["device_name"],
+                device_id=dev["device_id"],
+                topic=topic,
+                iot_configuration=dev["iot_configuration"])
+            configuration.append(dev_configuration)
+        return configuration
 
     def write_data_to_sql(self):
         pass
