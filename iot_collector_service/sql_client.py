@@ -21,7 +21,7 @@ class ISqlClient(ABC):
         pass
 
     @abstractmethod
-    def execute_stored_procedure(self):
+    def execute_stored_procedure(self, stored_procedure: str, input_args=()):
         pass
 
 class MySqlClient(ISqlClient):
@@ -63,5 +63,15 @@ class MySqlClient(ISqlClient):
         myresult = cursor.fetchall()
         return myresult
 
-    def execute_stored_procedure(self):
-        pass
+    def execute_stored_procedure(self, stored_procedure: str, input_args=()):
+        data = []
+        try:
+            cursor = self.connection.cursor(dictionary=True)
+            cursor.callproc(procname=stored_procedure, args=input_args)
+
+            for result in cursor.stored_results():
+                data = result.fetchall()
+
+        except mysql.connector.Error as error:
+            print(f"Failed to execute stored procedure: {error}")
+        return data
