@@ -61,6 +61,7 @@ class SQLService(ISQLService):
         configuration = []
         for conf in response:
             tmp = CollectorConfiguration(
+                configuration_id=conf["id"],
                 usr=conf["user"],
                 password=conf["password"],
                 ip_addr=conf["broker"],

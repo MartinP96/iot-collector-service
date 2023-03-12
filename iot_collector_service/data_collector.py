@@ -1,24 +1,10 @@
 from .mqtt_client import IMqttClient
+from .collector_configuration import CollectorConfiguration
+from .device_configuration import  DeviceConfiguration
 
 from abc import ABC, abstractmethod
-import json
 from threading import Thread
 from queue import Queue
-
-class CollectorConfiguration:
-
-    def __init__(self, collector_name: str,
-                 usr: str,
-                 password: str,
-                 ip_addr: str,
-                 port: int,
-                 topic: dict):
-        self.collector_name = collector_name
-        self.usr = usr
-        self.password = password
-        self.ip_addr = ip_addr
-        self.port = port
-        self.topic = topic
 
 class IDataCollector(ABC):
 
@@ -39,7 +25,7 @@ class IDataCollector(ABC):
         pass
 
     @abstractmethod
-    def set_configuration(self, conf: CollectorConfiguration):
+    def set_configuration(self, collector_conf: CollectorConfiguration, device_configuration: list):
         pass
 
     @abstractmethod
@@ -51,6 +37,7 @@ class MqttDataCollector(IDataCollector):
     def __init__(self, client: IMqttClient):
         self.client = client
         self.collector_configuration = None
+        self.device_configuration = None
 
         self._collection_thread = Thread(target=self._colection_thread)
         self._thread_stop = False
@@ -75,8 +62,12 @@ class MqttDataCollector(IDataCollector):
         self.client.mqtt_client_disconnect()
 
     def subscribe_topic(self):
-        for t in self.collector_configuration.topic:
-            self.client.mqtt_client_subscribe(topic=self.collector_configuration.topic[t])
+        for device in self.device_configuration:
+            topic = device.topic
+
+            for t in topic:
+                conn_string = t["topic"]
+                self.client.mqtt_client_subscribe(topic=conn_string)
 
     def unsubscribe_topic(self, topic):
         self.client.mqtt_client_unsubscribe(topic)
@@ -89,12 +80,12 @@ class MqttDataCollector(IDataCollector):
         self._collection_thread.join()
         self._thread_stop = False
 
-    def set_configuration(self, configuration: CollectorConfiguration):
-        self.collector_configuration = configuration
+    def set_configuration(self, collector_conf: CollectorConfiguration, device_configuration: list):
+        self.collector_configuration = collector_conf
+        self.device_configuration = device_configuration
 
     def get_data(self):
         data = self.data_queue.get()
-        #dict_data = json.loads(data["data"])
         return data
 
     def _colection_thread(self):
