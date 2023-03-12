@@ -87,6 +87,11 @@ class SQLService(ISQLService):
             configuration.append(dev_configuration)
         return configuration
 
+    def read_topic_configuration(self):
+        # Read device list
+        topic_list = self.sql_client.execute_stored_procedure("GetTopics")
+        return topic_list
+
     def write_data_to_sql(self):
         pass
 
