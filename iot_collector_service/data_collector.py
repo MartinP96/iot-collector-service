@@ -63,11 +63,8 @@ class MqttDataCollector(IDataCollector):
 
     def subscribe_topic(self):
         for device in self.device_configuration:
-            topic = device.topic
-
-            for t in topic:
-                conn_string = t["topic"]
-                self.client.mqtt_client_subscribe(topic=conn_string)
+            topic = device["topic"]
+            self.client.mqtt_client_subscribe(topic=topic)
 
     def unsubscribe_topic(self, topic):
         self.client.mqtt_client_unsubscribe(topic)
