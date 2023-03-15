@@ -26,7 +26,7 @@ class ISQLService(ABC):
         pass
 
     @abstractmethod
-    def write_data_to_sql(self):
+    def write_measurement_to_sql(self, measurement):
         pass
 
     @abstractmethod
@@ -92,8 +92,9 @@ class SQLService(ISQLService):
         topic_list = self.sql_client.execute_stored_procedure("GetTopics")
         return topic_list
 
-    def write_data_to_sql(self):
-        pass
+    def write_measurement_to_sql(self, measurement):
+        m = (measurement["topic_id"], measurement["measurement_type_id"], float(measurement["value"]))
+        self.sql_client.execute_stored_procedure("InsertMeasurement", m)
 
     def read_data_from_sql(self):
         pass
