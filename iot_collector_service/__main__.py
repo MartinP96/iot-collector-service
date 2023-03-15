@@ -6,82 +6,61 @@
 from .data_collector_service import DataCollectorService
 from .data_collector import MqttDataCollector, CollectorConfiguration
 from .mqtt_client import MqttClientPaho
-from .sql_client import  MySqlClient
+from .sql_client import MySqlClient
+from .sql_service import SQLService
 import json
-import csv
 
 def run_service():
 
-    # Read configuration from csv
-    configuration_path = "./configuration/"
-
-    # SQL configuration
-    with open(f"{configuration_path}sql_configuration.csv") as f:
-        reader = csv.DictReader(f)
-        sql_configuration_dict = next(reader)
-
-    # MQTT configuration
-    with open(f"{configuration_path}mqtt_configuration.csv") as f:
-        reader = csv.DictReader(f)
-        mqtt_configuration_dict = next(reader)
-
-    # Topic definitions
-    data_topic = "porenta/martin_room/air_quality/data/measurements"
-    beat_topic = "porenta/martin_room/air_quality/sys/beat"
-
-    topics = {
-        "data_topic": data_topic,
-        "beat_topic": beat_topic
-    }
-    conf = CollectorConfiguration(collector_name="MQTT_collector",
-                                  usr=mqtt_configuration_dict["user"],
-                                  password=mqtt_configuration_dict["password"],
-                                  ip_addr=mqtt_configuration_dict["broker"],
-                                  port=int(mqtt_configuration_dict["port"]),
-                                  topic=topics)
-
-    collector1 = MqttDataCollector(MqttClientPaho())
-    collector1.set_configuration(conf)
-
-    service = DataCollectorService()
-    service.add_collector(collector1)
-    service.start_collection()
-
     # Define SQL client
     sql_client = MySqlClient()
-    sql_client.connect_sql(
-        host=sql_configuration_dict["host"],
-        database=sql_configuration_dict["database"],
-        user=sql_configuration_dict["user"],
-        password=sql_configuration_dict["password"]
-    )
 
-    # Test data collection every 10 seconds
-    tmp = 0
-    
+    # Define SQL service
+    sql_service = SQLService(sql_client=sql_client)
+    sql_service.connect_service()
+
+    collector_configuration = sql_service.read_iot_configuration()
+    device_configuration = sql_service.read_device_configuration()
+    topic_configuration = sql_service.read_topic_configuration()
+
+    service = DataCollectorService()
+
+    for collector_conf in collector_configuration:
+        current_collector_topic_configuration = []
+        for i in topic_configuration:
+            if i["iot_configuration"] == collector_conf.configuration_id:
+                current_collector_topic_configuration.append(i)
+        collector = MqttDataCollector(MqttClientPaho())
+        collector.set_configuration(collector_conf, current_collector_topic_configuration)
+        service.add_collector(collector)
+
+    # Start collecting data from MQTT
+    service.start_collection()
+
     try:
         while 1:
-            data = service.get_data()
+            response = service.get_data()
+            topic = response["topic"]
+            try:  # TMP: Začasna rešitev, v prihodnje bodo vse naprave pošiljale podatke v JSON formatu
+                data = json.loads(response["data"])
+            except:
+                data = response["data"]
 
-            if data["topic"] == data_topic:
-                # Parse string to dict
-                dict_data = json.loads(data["data"])
+            # Assign measurement to device
+            for i in topic_configuration:
+                if i["topic"] == topic:
+                    if i["topic_type"] == 1:  # Measurement
+                        measurement = {"device_id": i["device_id"], "topic_id": i["topic_id"]}
+                        # Parse measurement packet
+                        for m in data:
+                            if m != "timestamp":  # TMP: Začasna rešitev, dodelati naprave da pošljejo zraven timestmp
+                                measurement["measurement_type_id"] = m
+                                measurement["value"] = data[m]
+                                print(measurement)
 
-                if tmp > 10:
-                    col_name = ["temperature", "humidity", "co2", "device_id"]
-                    col_val = [dict_data['temperature'], dict_data['humidity'], dict_data['co2'], 1]
-                    sql_client.insert_sql("iot_air_quality_measurements", col_name, col_val)
+                                sql_service.write_measurement_to_sql(measurement)
 
-                    print(f"Timestamp: {dict_data['timestamp']}\nTemp: {dict_data['temperature']}\n"
-                          f"Hum: {dict_data['humidity']}\nCO2: {dict_data['co2']}\n")
-
-                    tmp = 0
-                tmp += 1
-                
     except KeyboardInterrupt:
         service.stop_collection()
         sql_client.disconnect_sql()
         print('Service interrupted')
-
-if __name__ == '__main__':
-    run_service()
