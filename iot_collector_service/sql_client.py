@@ -67,8 +67,8 @@ class MySqlClient(ISqlClient):
         data = []
         try:
             cursor = self.connection.cursor(dictionary=True)
-            cursor.callproc(procname=stored_procedure, args=input_args)
-
+            cursor.callproc(stored_procedure, input_args)
+            self.connection.commit()
             for result in cursor.stored_results():
                 data = result.fetchall()
 
