@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import mysql.connector
 from mysql.connector import Error
 
-class SqlClient(ABC):
+class ISqlClient(ABC):
 
     @abstractmethod
     def connect_sql(self, host: str, database: str, user: str, password: str):
@@ -21,10 +21,10 @@ class SqlClient(ABC):
         pass
 
     @abstractmethod
-    def execute_stored_procedure(self):
+    def execute_stored_procedure(self, stored_procedure: str, input_args=()):
         pass
 
-class MySqlClient(SqlClient):
+class MySqlClient(ISqlClient):
 
     def __init__(self):
         self.connection = None
@@ -63,5 +63,15 @@ class MySqlClient(SqlClient):
         myresult = cursor.fetchall()
         return myresult
 
-    def execute_stored_procedure(self):
-        pass
+    def execute_stored_procedure(self, stored_procedure: str, input_args=()):
+        data = []
+        try:
+            cursor = self.connection.cursor(dictionary=True)
+            cursor.callproc(stored_procedure, input_args)
+            self.connection.commit()
+            for result in cursor.stored_results():
+                data = result.fetchall()
+
+        except mysql.connector.Error as error:
+            print(f"Failed to execute stored procedure: {error}")
+        return data

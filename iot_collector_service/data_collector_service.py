@@ -36,4 +36,4 @@ class DataCollectorService(IDataCollectorService):
         print("Collector service stop")
 
     def get_data(self):
-        return self.collectors_list[0].get_data()
+        return self.collectors_list[0].get_data()  # TODO: Naredi da deluje za več kolektorjev
