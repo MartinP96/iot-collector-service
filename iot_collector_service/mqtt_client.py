@@ -33,6 +33,9 @@ class IMqttClient(ABC):
     def mqtt_get_data(self):
         pass
 
+    @abstractmethod
+    def mqtt_publish_data(self, topic, data):
+        pass
 
 class MqttClientPaho(IMqttClient, mqttclient.Client):
     """
@@ -68,6 +71,7 @@ class MqttClientPaho(IMqttClient, mqttclient.Client):
         # Event handles
         self.on_connect = self._on_connect_handle
         self.on_message = self._on_message_handle
+        self.on_publish = self._on_publish_handle
         self.on_log = self._on_log_handle
 
         # Connect to broker
@@ -93,6 +97,9 @@ class MqttClientPaho(IMqttClient, mqttclient.Client):
     def mqtt_get_data(self):
         return self.data_queue.get()
 
+    def mqtt_publish_data(self, topic, data):
+        self.publish(topic, data)
+
     def _on_connect_handle(self, client, userdata, flags, rc):
         if rc == 0:
             print("Connected to MQTT Broker!")
@@ -105,3 +112,6 @@ class MqttClientPaho(IMqttClient, mqttclient.Client):
 
     def _on_log_handle(self, userdata, level, buf):
         print(buf)
+
+    def _on_publish_handle(self, client, userdata, mid):
+        print("on_publish, mid {}".format(mid))
