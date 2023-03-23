@@ -1,10 +1,10 @@
 from .mqtt_client import IMqttClient
 from .collector_configuration import CollectorConfiguration
-from .device_configuration import  DeviceConfiguration
 
 from abc import ABC, abstractmethod
 from threading import Thread
 from queue import Queue
+import json
 
 class IDataCollector(ABC):
 
@@ -39,9 +39,12 @@ class MqttDataCollector(IDataCollector):
         self.collector_configuration = None
         self.device_configuration = None
 
-        self._collection_thread = Thread(target=self._colection_thread)
         self._thread_stop = False
         self.data_queue = Queue(maxsize=10)
+        self.publish_queue = Queue(maxsize=5)
+
+        self._collection_thread = Thread(target=self._colection_thread_fun)
+        self._publish_thread = Thread(target=self._publish_thread_fun)
 
     def connect_collector(self) -> int:
         status = self.client.mqtt_client_connect(
@@ -71,10 +74,12 @@ class MqttDataCollector(IDataCollector):
 
     def run_collector(self):
         self._collection_thread.start()
+        self._publish_thread.start()
 
     def stop_collector(self):
         self._thread_stop = True
         self._collection_thread.join()
+        self._publish_thread.join()
         self._thread_stop = False
 
     def set_configuration(self, collector_conf: CollectorConfiguration, device_configuration: list):
@@ -85,7 +90,17 @@ class MqttDataCollector(IDataCollector):
         data = self.data_queue.get()
         return data
 
-    def _colection_thread(self):
+    def publish_data(self, data):
+        self.publish_queue.put(data)
+
+    def _colection_thread_fun(self):
         while not self._thread_stop:
             data = self.client.mqtt_get_data()
             self.data_queue.put(data)
+
+    def _publish_thread_fun(self):
+        while not self._thread_stop:
+            packet = self.publish_queue.get()
+            mqtt_msg = json.dumps(packet["data"])
+            self.client.mqtt_publish_data(topic=packet["topic"],
+                                          data=mqtt_msg)

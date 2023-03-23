@@ -37,3 +37,6 @@ class DataCollectorService(IDataCollectorService):
 
     def get_data(self):
         return self.collectors_list[0].get_data()  # TODO: Naredi da deluje za več kolektorjev
+
+    def publish_data(self, data):
+        self.collectors_list[0].publish_data(data)  # TODO: Naredi da deluje za več kolektorjev
