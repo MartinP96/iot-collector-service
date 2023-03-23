@@ -6,6 +6,12 @@ from .sql_client import MySqlClient
 from .sql_service import SQLService
 import json
 
+from threading import Thread
+from queue import Queue
+
+import time
+import datetime
+
 class iIOTService(ABC):
 
     @abstractmethod
@@ -44,8 +50,13 @@ class IOTService(iIOTService):
             collector.set_configuration(collector_conf, current_collector_topic_configuration)
             self.collector_service.add_collector(collector)
 
+        self._data_publish_thread = Thread(target=self._data_publish_thread_fun)
+        self._measurement_collection_thread = Thread(target=self._measurement_collection_thread_fun)
+
     def service_start(self):
         self.collector_service.start_collection()
+        self._data_publish_thread.start()
+        self._measurement_collection_thread.start()
 
     def service_stop(self):
         pass
@@ -78,5 +89,39 @@ class IOTService(iIOTService):
             self.sql_client.disconnect_sql()
             print('Service interrupted')
 
-    def get_configuration(self):
-        pass
+    def _measurement_collection_thread_fun(self):
+        while 1:
+            response = self.collector_service.get_data()
+            topic = response["topic"]
+            try:  # TMP: Začasna rešitev, v prihodnje bodo vse naprave pošiljale podatke v JSON formatu
+                data = json.loads(response["data"])
+            except:
+                data = response["data"]
+
+            # Assign measurement to device
+            for i in self.topic_configuration:
+                if i["topic"] == topic:
+                    if i["topic_type"] == 1:  # Measurement
+                        measurement = {"device_id": i["device_id"], "topic_id": i["topic_id"]}
+                        # Parse measurement packet
+                        for m in data:
+                            if m != "timestamp":  # TMP: Začasna rešitev, dodelati naprave da pošljejo zraven timestmp
+                                measurement["measurement_type_id"] = m
+                                measurement["value"] = data[m]
+                                print(measurement)
+                                self.sql_service.write_measurement_to_sql(measurement)
+
+    def _data_publish_thread_fun(self):
+        tmp = 0
+        while 1:
+            data = {
+                "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "val": tmp
+            }
+            data_packet = {
+                "topic": "IOT_System/service/beat",
+                "data": data
+            }
+            self.collector_service.publish_data(data_packet)
+            tmp += 1
+            time.sleep(1)
