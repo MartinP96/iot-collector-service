@@ -1,7 +1,5 @@
 from .data_collector import IDataCollector
 from abc import ABC, abstractmethod
-from threading import Thread
-from queue import Queue
 
 class IDataCollectorService(ABC):
 

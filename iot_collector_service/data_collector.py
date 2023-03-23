@@ -1,10 +1,10 @@
 from .mqtt_client import IMqttClient
 from .collector_configuration import CollectorConfiguration
-from .device_configuration import DeviceConfiguration
 
 from abc import ABC, abstractmethod
 from threading import Thread
 from queue import Queue
+import json
 
 class IDataCollector(ABC):
 
@@ -101,6 +101,6 @@ class MqttDataCollector(IDataCollector):
     def _publish_thread_fun(self):
         while not self._thread_stop:
             packet = self.publish_queue.get()
-            print(f"data published: {packet}")
-            self.client.mqtt_publish_data(topic="porenta/martin_room/service/test_beat",
-                                          data=packet)
+            mqtt_msg = json.dumps(packet["data"])
+            self.client.mqtt_publish_data(topic=packet["topic"],
+                                          data=mqtt_msg)
