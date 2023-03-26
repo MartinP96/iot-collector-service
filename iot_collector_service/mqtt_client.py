@@ -114,4 +114,5 @@ class MqttClientPaho(IMqttClient, mqttclient.Client):
         print(buf)
 
     def _on_publish_handle(self, client, userdata, mid):
-        print("on_publish, mid {}".format(mid))
+        #print("on_publish, mid {}".format(mid))
+        pass
