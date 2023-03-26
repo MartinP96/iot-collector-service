@@ -33,6 +33,10 @@ class ISQLService(ABC):
     def read_data_from_sql(self):
         pass
 
+    @abstractmethod
+    def read_cmd_from_sql(self):
+        pass
+
 class SQLService(ISQLService):
 
     def __init__(self, sql_client: ISqlClient):
@@ -98,3 +102,14 @@ class SQLService(ISQLService):
 
     def read_data_from_sql(self):
         pass
+
+    def read_cmd_from_sql(self):
+        cmds = self.sql_client.execute_stored_procedure("GetServiceCommands")
+        return cmds
+
+    def read_parameters_from_sql(self, dev_id):
+        parameters = self.sql_client.execute_stored_procedure("GetParametersForDevice", (dev_id,))
+        return parameters
+
+    def reset_cmd_flag(self, cmd_id):
+        self.sql_client.execute_stored_procedure("ResetCmdFlagForDevice", (cmd_id,))
