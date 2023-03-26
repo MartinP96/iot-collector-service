@@ -47,14 +47,12 @@ class IOTService(iIOTService):
             self.collector_service.add_collector(collector)
 
         self._mutex = Lock()
-        self._data_publish_thread = Thread(target=self._data_publish_thread_fun)
+        #self._data_publish_thread = Thread(target=self._data_publish_thread_fun) # Začasno zakomentirano ker se ne rabi
         self._measurement_collection_thread = Thread(target=self._measurement_collection_thread_fun)
         self._service_main_thread = Thread(target=self._service_main_thread_fun)
 
     def service_start(self):
         self.collector_service.start_collection()
-        self._data_publish_thread.start()
-        self._measurement_collection_thread.start()
         self._service_main_thread.start()
 
     def service_stop(self):
@@ -121,7 +119,7 @@ class IOTService(iIOTService):
                                     self.sql_service.write_measurement_to_sql(measurement)
                                 finally:
                                     self._mutex.release()
-
+    '''
     def _data_publish_thread_fun(self):
         tmp = 0
         while 1:
@@ -136,22 +134,34 @@ class IOTService(iIOTService):
             # self.collector_service.publish_data(data_packet)
             tmp += 1
             time.sleep(1)
+    '''
 
     def _service_main_thread_fun(self):
-        while 1:
-            self._mutex.acquire()
-            try:
-                # Get service commands
-                cmds = self.sql_service.read_cmd_from_sql()
-                # Service all recevied commands
-                for cmd in cmds:
-                    if cmd["flag"] == 1:
-                        if cmd["cmd_type"] == 100:  # CMD: Write parameters
-                            self._cmd_write_parameters(cmd)
-                            self.sql_service.reset_cmd_flag(cmd["id"])
-            finally:
-                self._mutex.release()
-            time.sleep(1)
+
+        # Start secondary threads
+        self._measurement_collection_thread.start()
+        try:
+            while 1:
+                self._mutex.acquire()
+                try:
+                    # Get service commands
+                    cmds = self.sql_service.read_cmd_from_sql()
+                    # Service all recevied commands
+                    for cmd in cmds:
+                        if cmd["flag"] == 1:
+                            if cmd["cmd_type"] == 100:  # CMD: Write parameters
+                                self._cmd_write_parameters(cmd)
+                                self.sql_service.reset_cmd_flag(cmd["id"])
+                finally:
+                    self._mutex.release()
+                time.sleep(1)
+
+        except KeyboardInterrupt:
+            print('Service interrupted')
+            self.collector_service.stop_collection()
+            self.sql_client.disconnect_sql()
+            self._measurement_collection_thread.join()
+            self._service_main_thread.join()
 
     def _cmd_write_parameters(self, cmd):
 
