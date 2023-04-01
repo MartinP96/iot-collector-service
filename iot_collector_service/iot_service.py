@@ -58,41 +58,6 @@ class IOTService(iIOTService):
     def service_stop(self):
         pass
 
-    '''
-    def service_run(self):
-        try:
-            while 1:
-                response = self.collector_service.get_data()
-                topic = response["topic"]
-                try:  # TMP: Začasna rešitev, v prihodnje bodo vse naprave pošiljale podatke v JSON formatu
-                    data = json.loads(response["data"])
-                except:
-                    data = response["data"]
-
-                # Assign measurement to device
-                for i in self.topic_configuration:
-                    if i["topic"] == topic:
-                        if i["topic_type"] == 1:  # Measurement
-                            measurement = {"device_id": i["device_id"], "topic_id": i["topic_id"]}
-                            # Parse measurement packet
-                            for m in data:
-                                if m != "timestamp":  # TMP: Začasna rešitev, dodelati naprave da pošljejo zraven timestmp
-                                    measurement["measurement_type_id"] = m
-                                    measurement["value"] = data[m]
-                                    print(measurement)
-
-                                    self._mutex.acquire()
-                                    try:
-                                        self.sql_service.write_measurement_to_sql(measurement)
-                                    finally:
-                                        self._mutex.release()
-
-        except KeyboardInterrupt:
-            self.collector_service.stop_collection()
-            self.sql_client.disconnect_sql()
-            print('Service interrupted')
-        '''
-
     def _measurement_collection_thread_fun(self):
         while 1:
             response = self.collector_service.get_data()
@@ -167,15 +132,19 @@ class IOTService(iIOTService):
 
         # Get parameters from SQL
         parameters = self.sql_service.read_parameters_from_sql(cmd["device_id"])
+        data_packets = {}
 
-        for param in parameters:
-            # Create packet
-            data = {
-                "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                param["param_name"]: param["value"]
-            }
+        # Get list of all topics in parameters
+        topic_list = list(set([d["topic"] for d in parameters if "topic" in d]))
+
+        # Build data packets for each topic
+        for t in topic_list:
+            parameter_for_topic = list(filter(lambda par: par["topic"] == t, parameters))
+            data = {}
+            for param in parameter_for_topic:
+                data[param["param_name"]] = param["value"]
             data_packet = {
-                "topic": param["topic"],
+                "topic": t,
                 "data": data
             }
             self.collector_service.publish_data(data_packet)
