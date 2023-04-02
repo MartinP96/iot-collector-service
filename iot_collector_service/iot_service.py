@@ -6,16 +6,15 @@ from .sql_client import MySqlClient
 from .sql_service import SQLService
 import json
 
-from threading import Thread, Lock
+from threading import Thread, Lock, Event
 from queue import Queue
 
 import time
-import datetime
 
 class iIOTService(ABC):
 
     @abstractmethod
-    def service_start(self):
+    def service_run(self):
         pass
 
     @abstractmethod
@@ -46,44 +45,55 @@ class IOTService(iIOTService):
             collector.set_configuration(collector_conf, current_collector_topic_configuration)
             self.collector_service.add_collector(collector)
 
+        self._stop_event = Event()
         self._mutex = Lock()
         #self._data_publish_thread = Thread(target=self._data_publish_thread_fun) # Začasno zakomentirano ker se ne rabi
         self._measurement_collection_thread = Thread(target=self._measurement_collection_thread_fun)
         self._service_main_thread = Thread(target=self._service_main_thread_fun)
 
-    def service_start(self):
-        self.collector_service.start_collection()
+    def service_run(self):
         self._service_main_thread.start()
 
     def service_stop(self):
         pass
 
     def _measurement_collection_thread_fun(self):
+
+        self.collector_service.start_collection()
+        stop_flag = False
         while 1:
-            response = self.collector_service.get_data()
-            topic = response["topic"]
-            try:  # TMP: Začasna rešitev, v prihodnje bodo vse naprave pošiljale podatke v JSON formatu
-                data = json.loads(response["data"])
-            except:
-                data = response["data"]
+            if not self._stop_event.is_set():
+                stop_flag = False
+                response = self.collector_service.get_data()
+                topic = response["topic"]
+                try:  # TMP: Začasna rešitev, v prihodnje bodo vse naprave pošiljale podatke v JSON formatu
+                    data = json.loads(response["data"])
+                except:
+                    data = response["data"]
 
-            # Assign measurement to device
-            for i in self.topic_configuration:
-                if i["topic"] == topic:
-                    if i["topic_type"] == 1:  # Measurement
-                        measurement = {"device_id": i["device_id"], "topic_id": i["topic_id"]}
-                        # Parse measurement packet
-                        for m in data:
-                            if m != "timestamp":  # TMP: Začasna rešitev, dodelati naprave da pošljejo zraven timestmp
-                                measurement["measurement_type_id"] = m
-                                measurement["value"] = data[m]
-                                print(measurement)
+                # Assign measurement to device
+                for i in self.topic_configuration:
+                    if i["topic"] == topic:
+                        if i["topic_type"] == 1:  # Measurement
+                            measurement = {"device_id": i["device_id"], "topic_id": i["topic_id"]}
+                            # Parse measurement packet
+                            for m in data:
+                                if m != "timestamp":  # TMP: Začasna rešitev, dodelati naprave da pošljejo zraven timestmp
+                                    measurement["measurement_type_id"] = m
+                                    measurement["value"] = data[m]
+                                    print(measurement)
 
-                                self._mutex.acquire()
-                                try:
-                                    self.sql_service.write_measurement_to_sql(measurement)
-                                finally:
-                                    self._mutex.release()
+                                    self._mutex.acquire()
+                                    try:
+                                        self.sql_service.write_measurement_to_sql(measurement)
+                                    finally:
+                                        self._mutex.release()
+            else:
+                if not stop_flag:
+                    stop_flag = True
+                    #self.collector_service.stop_collection()
+                    print("Collection thread stopped!")
+
     '''
     def _data_publish_thread_fun(self):
         tmp = 0
@@ -105,6 +115,7 @@ class IOTService(iIOTService):
 
         # Start secondary threads
         self._measurement_collection_thread.start()
+
         try:
             while 1:
                 self._mutex.acquire()
@@ -117,6 +128,15 @@ class IOTService(iIOTService):
                             if cmd["cmd_type"] == 100:  # CMD: Write parameters
                                 self._cmd_write_parameters(cmd)
                                 self.sql_service.reset_cmd_flag(cmd["id"])
+                            elif cmd["cmd_type"] == 0:  # CMD: Start service
+                                self._stop_event.clear()
+                                self.sql_service.reset_cmd_flag(cmd["id"])
+                            elif cmd["cmd_type"] == 1:  # CMD: Stop service
+                                self._stop_event.set()
+                                self.sql_service.reset_cmd_flag(cmd["id"])
+                                #self._measurement_collection_thread.join()
+                            elif cmd["cmd_type"] == 5:  # CMD: Get new configuration
+                                pass
                 finally:
                     self._mutex.release()
                 time.sleep(1)
@@ -132,7 +152,6 @@ class IOTService(iIOTService):
 
         # Get parameters from SQL
         parameters = self.sql_service.read_parameters_from_sql(cmd["device_id"])
-        data_packets = {}
 
         # Get list of all topics in parameters
         topic_list = list(set([d["topic"] for d in parameters if "topic" in d]))
