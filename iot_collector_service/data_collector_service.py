@@ -40,6 +40,7 @@ class DataCollectorService(IDataCollectorService):
 
     def stop_collection(self):
         self.collectors_list[0].stop_collector()
+        self.collectors_list[0].disconnect_collector()
         del self.collectors_list[0]
         print("Collector service stop")
 

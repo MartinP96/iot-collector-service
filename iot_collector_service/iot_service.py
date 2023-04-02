@@ -127,17 +127,20 @@ class IOTService(iIOTService):
                         if cmd["flag"] == 1:
                             if cmd["cmd_type"] == 100:  # CMD: Write parameters
                                 self._cmd_write_parameters(cmd)
-                                self.sql_service.reset_cmd_flag(cmd["id"])
+                                #self.sql_service.reset_cmd_flag(cmd["id"])
                             elif cmd["cmd_type"] == 0:  # CMD: Start service
                                 self.collector_service.resume_collection()
                                 self._stop_event.clear()
-                                self.sql_service.reset_cmd_flag(cmd["id"])
+                                #self.sql_service.reset_cmd_flag(cmd["id"])
                             elif cmd["cmd_type"] == 1:  # CMD: Stop service
                                 self._stop_event.set()
                                 self.sql_service.reset_cmd_flag(cmd["id"])
                                 #self._measurement_collection_thread.join()
                             elif cmd["cmd_type"] == 5:  # CMD: Get new configuration
-                                pass
+                                # Transfer new configuraiont
+                                self._cmd_get_new_configuration()
+
+                            self.sql_service.reset_cmd_flag(cmd["id"])
                 finally:
                     self._mutex.release()
                 time.sleep(1)
@@ -168,3 +171,23 @@ class IOTService(iIOTService):
                 "data": data
             }
             self.collector_service.publish_data(data_packet)
+
+    def _cmd_get_new_configuration(self):
+        print("Getting new configuration")
+        self.collector_configuration = self.sql_service.read_iot_configuration()
+        self.device_configuration = self.sql_service.read_device_configuration()
+        self.topic_configuration = self.sql_service.read_topic_configuration()
+
+        self.collector_service.stop_collection()
+
+        # Create new data collectors
+        for collector_conf in self.collector_configuration:
+            current_collector_topic_configuration = []
+            for i in self.topic_configuration:
+                if i["iot_configuration"] == collector_conf.configuration_id:
+                    current_collector_topic_configuration.append(i)
+            collector = MqttDataCollector(MqttClientPaho())
+            collector.set_configuration(collector_conf, current_collector_topic_configuration)
+            self.collector_service.add_collector(collector)
+
+        self.collector_service.start_collection()
