@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import mysql.connector
+from mysql.connector.locales.eng import client_error
 from mysql.connector import Error
 
 class ISqlClient(ABC):
