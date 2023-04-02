@@ -91,7 +91,7 @@ class IOTService(iIOTService):
             else:
                 if not stop_flag:
                     stop_flag = True
-                    #self.collector_service.stop_collection()
+                    self.collector_service.hold_collection()
                     print("Collection thread stopped!")
 
     '''
@@ -129,6 +129,7 @@ class IOTService(iIOTService):
                                 self._cmd_write_parameters(cmd)
                                 self.sql_service.reset_cmd_flag(cmd["id"])
                             elif cmd["cmd_type"] == 0:  # CMD: Start service
+                                self.collector_service.resume_collection()
                                 self._stop_event.clear()
                                 self.sql_service.reset_cmd_flag(cmd["id"])
                             elif cmd["cmd_type"] == 1:  # CMD: Stop service

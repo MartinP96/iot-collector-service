@@ -31,8 +31,16 @@ class DataCollectorService(IDataCollectorService):
         else:
             print("Collector not connected!")
 
+    def resume_collection(self):
+        self.collectors_list[0].subscribe_topic()
+
+    def hold_collection(self):
+        self.collectors_list[0].unsubscribe_all_topic()
+        print("Collector service held")
+
     def stop_collection(self):
         self.collectors_list[0].stop_collector()
+        del self.collectors_list[0]
         print("Collector service stop")
 
     def get_data(self):
