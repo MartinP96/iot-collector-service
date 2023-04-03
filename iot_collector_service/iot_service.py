@@ -17,9 +17,6 @@ class iIOTService(ABC):
     def service_run(self):
         pass
 
-    @abstractmethod
-    def service_stop(self):
-        pass
 
 class IOTService(iIOTService):
 
@@ -54,11 +51,7 @@ class IOTService(iIOTService):
     def service_run(self):
         self._service_main_thread.start()
 
-    def service_stop(self):
-        pass
-
     def _measurement_collection_thread_fun(self):
-
         self.collector_service.start_collection()
         stop_flag = False
         while 1:
@@ -66,11 +59,7 @@ class IOTService(iIOTService):
                 stop_flag = False
                 response = self.collector_service.get_data()
                 topic = response["topic"]
-                try:  # TMP: Začasna rešitev, v prihodnje bodo vse naprave pošiljale podatke v JSON formatu
-                    data = json.loads(response["data"])
-                except:
-                    data = response["data"]
-
+                data = json.loads(response["data"])
                 # Assign measurement to device
                 for i in self.topic_configuration:
                     if i["topic"] == topic:
@@ -112,7 +101,6 @@ class IOTService(iIOTService):
     '''
 
     def _service_main_thread_fun(self):
-
         # Start secondary threads
         self._measurement_collection_thread.start()
 
