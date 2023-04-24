@@ -92,7 +92,11 @@ class MqttDataCollector(IDataCollector):
         self.device_configuration = device_configuration
 
     def get_data(self):
-        data = self.data_queue.get()
+        data = {}
+        try:
+            data = self.data_queue.get(timeout=10)
+        except:
+            print("No data received")
         return data
 
     def publish_data(self, data):

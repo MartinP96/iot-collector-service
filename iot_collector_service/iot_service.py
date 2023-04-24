@@ -58,25 +58,26 @@ class IOTService(iIOTService):
             if not self._stop_event.is_set():
                 stop_flag = False
                 response = self.collector_service.get_data()
-                topic = response["topic"]
-                data = json.loads(response["data"])
-                # Assign measurement to device
-                for i in self.topic_configuration:
-                    if i["topic"] == topic:
-                        if i["topic_type"] == 1:  # Measurement
-                            measurement = {"device_id": i["device_id"], "topic_id": i["topic_id"]}
-                            # Parse measurement packet
-                            for m in data:
-                                if m != "timestamp":  # TMP: Začasna rešitev, dodelati naprave da pošljejo zraven timestmp
-                                    measurement["measurement_type_id"] = m
-                                    measurement["value"] = data[m]
-                                    print(measurement)
+                if response:
+                    topic = response["topic"]
+                    data = json.loads(response["data"])
+                    # Assign measurement to device
+                    for i in self.topic_configuration:
+                        if i["topic"] == topic:
+                            if i["topic_type"] == 1:  # Measurement
+                                measurement = {"device_id": i["device_id"], "topic_id": i["topic_id"]}
+                                # Parse measurement packet
+                                for m in data:
+                                    if m != "timestamp":  # TMP: Začasna rešitev, dodelati naprave da pošljejo zraven timestmp
+                                        measurement["measurement_type_id"] = m
+                                        measurement["value"] = data[m]
+                                        print(measurement)
 
-                                    self._mutex.acquire()
-                                    try:
-                                        self.sql_service.write_measurement_to_sql(measurement)
-                                    finally:
-                                        self._mutex.release()
+                                        self._mutex.acquire()
+                                        try:
+                                            self.sql_service.write_measurement_to_sql(measurement)
+                                        finally:
+                                            self._mutex.release()
             else:
                 if not stop_flag:
                     stop_flag = True
