@@ -80,9 +80,11 @@ class IOTService(iIOTService):
                                             self._mutex.release()
             else:
                 if not stop_flag:
-                    stop_flag = True
                     self.collector_service.hold_collection()
-                    print("Collection thread stopped!")
+
+                stop_flag = True
+                print("Collection thread stopped!")
+                time.sleep(1)
 
     '''
     def _data_publish_thread_fun(self):
