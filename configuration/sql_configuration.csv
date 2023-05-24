@@ -1,2 +1,2 @@
 host,database,user,password
-192.168.0.101,test_db,remote_admin,admin
+localhost,test_db,remote_admin,admin
