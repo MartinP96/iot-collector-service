@@ -81,8 +81,9 @@ class IOTService(iIOTService):
             else:
                 if not stop_flag:
                     stop_flag = True
-                    self.collector_service.hold_collection()
-                    print("Collection thread stopped!")
+                self.collector_service.hold_collection()
+                print("Collection thread stopped!")
+                time.sleep(1)
 
     '''
     def _data_publish_thread_fun(self):
