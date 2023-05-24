@@ -81,7 +81,6 @@ class IOTService(iIOTService):
             else:
                 if not stop_flag:
                     self.collector_service.hold_collection()
-
                 stop_flag = True
                 print("Collection thread stopped!")
                 time.sleep(1)
