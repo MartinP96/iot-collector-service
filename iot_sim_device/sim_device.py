@@ -7,8 +7,9 @@ from threading import Thread
 
 class SimDeviceConfiguration:
     def __init__(self, broker_usr: str, broker_password: str, broker_ip: str, broker_port: int, publish_topic: str,
-                 subscribe_topic: str, publish_interval: float):
+                 subscribe_topic: str, publish_interval: float, device_measurements: list):
 
+        self.measurements = device_measurements
         self.configuration = {
             "broker": {
                 "usr": broker_usr,
