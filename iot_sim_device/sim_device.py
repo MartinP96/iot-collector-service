@@ -7,7 +7,7 @@ from threading import Thread
 
 class SimDeviceConfiguration:
     def __init__(self, broker_usr: str, broker_password: str, broker_ip: str, broker_port: int, publish_topic: str,
-                 subscribe_topic: str):
+                 subscribe_topic: str, publish_interval: float):
 
         self.configuration = {
             "broker": {
@@ -17,7 +17,8 @@ class SimDeviceConfiguration:
                 "port": broker_port
             },
             "data_publish_topic": publish_topic,
-            "data_subscribe_topic": subscribe_topic
+            "data_subscribe_topic": subscribe_topic,
+            "publish_interval": publish_interval
         }
 
 
@@ -54,7 +55,7 @@ class SimDevice(ISimDevice):
         self._sim_device_thread = Thread(target=self._publish_data_fun)
 
     def run_device(self):
-        self._sim_device_thread.run()
+        self._sim_device_thread.start()
 
     def _publish_data_fun(self):
 
@@ -66,4 +67,4 @@ class SimDevice(ISimDevice):
             mqtt_msg = json.dumps(data)
             self.mqtt_client.mqtt_publish_data(topic=self.sim_device_configuration.configuration["data_publish_topic"],
                                                data=mqtt_msg)
-            sleep(1)
+            sleep(self.sim_device_configuration.configuration["publish_interval"])
