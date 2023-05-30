@@ -1,4 +1,4 @@
 device_name,measurement_type,min_value,max_value,floating_point
-"test_dev_1", "co2", 0,3000,0
-"test_dev_1", "test measurement", 0,100,1
-"test_dev_2", "humidity", 0,80,1
+"test_dev_1","co2",0,3000,0
+"test_dev_1","test measurement",0,100,1
+"test_dev_2","humidity",0,80,1
