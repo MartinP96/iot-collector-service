@@ -1,0 +1,3 @@
+device_name,publish_topic,subscribe_topic,publish_interval
+"test_dev_1", "porenta/martin_room/air_quality_1/data/measurements","",1
+"test_dev_2", "porenta/martin_room/air_quality_2/data/measurements","",1.5
