@@ -18,7 +18,7 @@ if __name__ == '__main__':
         sim_measurements = list(reader)
 
     # Define MQtt client
-    mqtt_cli = MqttClientPaho()
+    #mqtt_cli =
 
     sim_devices = []
     for conf in sim_configuration:
@@ -33,7 +33,7 @@ if __name__ == '__main__':
                                               publish_interval=float(conf["publish_interval"]),
                                               device_measurements=measurements)
 
-        sim_dev = SimDevice(client=mqtt_cli,
+        sim_dev = SimDevice(client=MqttClientPaho(),
                             device_configuration=sim_dev_conf)
         sim_devices.append(sim_dev)
         sim_dev.run_device()
