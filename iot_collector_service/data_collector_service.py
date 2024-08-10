@@ -68,4 +68,5 @@ class DataCollectorService(IDataCollectorService):
         else:
             #Create sub folder of each collector
             for collector in self.collectors_list:
-                pass
+                if not os.path.exists(f"collector_data/{collector.device_settings.device_name}"):
+                    os.makedirs(f"collector_data/{collector.device_settings.device_name}")
