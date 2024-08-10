@@ -1,5 +1,6 @@
 from .data_collector import IDataCollector
 from abc import ABC, abstractmethod
+import os
 
 class IDataCollectorService(ABC):
 
@@ -15,12 +16,18 @@ class IDataCollectorService(ABC):
     def stop_collection(self):
         pass
 
+    @abstractmethod
+    def create_folder_structure(self):
+        pass
+
 class DataCollectorService(IDataCollectorService):
     def __init__(self):
         self.collectors_list = []
+        self.create_folder_structure()
 
     def add_collector(self, new_collector: IDataCollector, collector_name=""):
         self.collectors_list.append(new_collector)
+        self.create_folder_structure()
 
     def start_collection(self):
         status = self.collectors_list[0].connect_collector()
@@ -49,3 +56,16 @@ class DataCollectorService(IDataCollectorService):
 
     def publish_data(self, data):
         self.collectors_list[0].publish_data(data)  # TODO: Naredi da deluje za več kolektorjev
+
+    def create_folder_structure(self):
+        # Create collector log folder
+        if not os.path.exists("collector_logs/"):
+            os.makedirs("collector_logs/")
+
+        # Create measurement data folder
+        if not os.path.exists("collector_data/"):
+            os.makedirs("collector_data/")
+        else:
+            #Create sub folder of each collector
+            for collector in self.collectors_list:
+                pass

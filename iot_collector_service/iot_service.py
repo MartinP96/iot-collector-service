@@ -34,13 +34,14 @@ class IOTService(iIOTService):
 
         self.collector_service = DataCollectorService()
         for collector_conf in self.collector_configuration:
-            current_collector_topic_configuration = []
-            for i in self.topic_configuration:
-                if i["iot_configuration"] == collector_conf.configuration_id:
-                    current_collector_topic_configuration.append(i)
-            collector = MqttDataCollector(MqttClientPaho())
-            collector.set_configuration(collector_conf, current_collector_topic_configuration)
-            self.collector_service.add_collector(collector)
+            for device_conf in self.device_configuration:
+                current_collector_topic_configuration = []
+                for i in self.topic_configuration:
+                    if i["iot_configuration"] == collector_conf.configuration_id and i["device_id"] == device_conf.device_id:
+                        current_collector_topic_configuration.append(i)
+                collector = MqttDataCollector(MqttClientPaho())
+                collector.set_configuration(collector_conf, current_collector_topic_configuration, device_conf)
+                self.collector_service.add_collector(collector)
 
         self._stop_event = Event()
         self._mutex = Lock()

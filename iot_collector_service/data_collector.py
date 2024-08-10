@@ -1,5 +1,6 @@
 from .mqtt_client import IMqttClient
 from .collector_configuration import CollectorConfiguration
+from .device_configuration import  DeviceConfiguration
 
 from abc import ABC, abstractmethod
 from threading import Thread, Event
@@ -25,7 +26,8 @@ class IDataCollector(ABC):
         pass
 
     @abstractmethod
-    def set_configuration(self, collector_conf: CollectorConfiguration, device_configuration: list):
+    def set_configuration(self, collector_conf: CollectorConfiguration, device_topic_configuration: list,
+                          device_configuration: DeviceConfiguration):
         pass
 
     @abstractmethod
@@ -38,6 +40,7 @@ class MqttDataCollector(IDataCollector):
         self.client = client
         self.collector_configuration = None
         self.device_configuration = None
+        self.device_settings = None
 
         self._thread_stop = False
         self.data_queue = Queue(maxsize=10)
@@ -87,9 +90,11 @@ class MqttDataCollector(IDataCollector):
         self._stop_event.set()
         self._stop_event2.set()
 
-    def set_configuration(self, collector_conf: CollectorConfiguration, device_configuration: list):
+    def set_configuration(self, collector_conf: CollectorConfiguration, device_topic_configuration: list,
+                          device_configuration: DeviceConfiguration):
         self.collector_configuration = collector_conf
-        self.device_configuration = device_configuration
+        self.device_configuration = device_topic_configuration
+        self.device_settings = device_configuration
 
     def get_data(self):
         data = {}

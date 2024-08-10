@@ -69,7 +69,7 @@ class SQLService(ISQLService):
                 usr=conf["user"],
                 password=conf["password"],
                 ip_addr=conf["broker"],
-                port=conf["port"]
+                port=conf["port"],
             )
 
             configuration.append(tmp)
