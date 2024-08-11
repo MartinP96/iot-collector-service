@@ -99,7 +99,7 @@ class MqttDataCollector(IDataCollector):
     def get_data(self):
         data = {}
         try:
-            data = self.data_queue.get(timeout=10)
+            data = self.data_queue.get(timeout=0.1)
         except:
             print("No data received")
         return data
