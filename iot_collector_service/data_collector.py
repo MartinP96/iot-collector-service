@@ -101,7 +101,8 @@ class MqttDataCollector(IDataCollector):
         try:
             data = self.data_queue.get(timeout=0.1)
         except:
-            print("No data received")
+            # print("No data received")
+            pass
         return data
 
     def publish_data(self, data):
