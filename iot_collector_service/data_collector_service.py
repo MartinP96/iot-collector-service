@@ -4,9 +4,8 @@ import os
 import logging
 from datetime import datetime
 
-logger = logging.getLogger(__name__)
-DATA_LOG_PATH = "collector_logs/"
 
+DATA_LOG_PATH = "collector_logs/"
 
 class DataCollectorService_Packet():
     """
@@ -39,7 +38,7 @@ class DataCollectorService(IDataCollectorService):
         self.create_folder_structure()
 
         # Create datalog
-        logging.basicConfig(filename=f"{DATA_LOG_PATH}log_{datetime.today().strftime('%Y%m%d_%H%M%S')}.log",
+        logging.basicConfig(filename=f"{DATA_LOG_PATH}log_{datetime.today().strftime('%Y%m%d')}.log",
                             format='%(asctime)s %(levelname)-8s %(message)s',
                             level=logging.INFO,
                             datefmt='%Y-%m-%d %H:%M:%S')

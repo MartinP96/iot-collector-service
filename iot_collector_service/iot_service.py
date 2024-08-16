@@ -6,10 +6,14 @@ from .sql_client import MySqlClient
 from .sql_service import SQLService
 import json
 
+import sys
 from threading import Thread, Lock, Event
-from queue import Queue
-
 import time
+import logging
+import os
+from datetime import datetime
+
+logger = logging.getLogger(__name__)
 
 class iIOTService(ABC):
 
@@ -17,16 +21,37 @@ class iIOTService(ABC):
     def service_run(self):
         pass
 
+    @abstractmethod
+    def _create_folder_structure(self):
+        pass
 
 class IOTService(iIOTService):
 
     def __init__(self):
+
+        # Create folder structure
+        self._create_folder_structure()
+
+        # Create datalog
+        logging.basicConfig(filename=f"iot_service_logs/log_{datetime.today().strftime('%Y%m%d')}.log",
+                            format='%(asctime)s %(levelname)-8s %(message)s',
+                            level=logging.INFO,
+                            datefmt='%Y-%m-%d %H:%M:%S')
+
         # Define SQL client
         self.sql_client = MySqlClient()
 
         # Define SQL service
         self.sql_service = SQLService(sql_client=self.sql_client)
-        self.sql_service.connect_service()
+
+        try:
+            self.sql_service.connect_service()
+            logging.info(f"Connecting to SQL server!")
+        except:
+            logging.info(f"Connecting to SQL failed! Stopping program execution")
+            sys.exit(1)
+
+        logging.info(f"Connected to sql!")
 
         self.collector_configuration = self.sql_service.read_iot_configuration()
         self.device_configuration = self.sql_service.read_device_configuration()
@@ -183,3 +208,8 @@ class IOTService(iIOTService):
             self.collector_service.add_collector(collector)
 
         self.collector_service.start_collection()
+
+    def _create_folder_structure(self):
+        # Create collector log folder
+        if not os.path.exists("iot_service_logs/"):
+            os.makedirs("iot_service_logs/")
