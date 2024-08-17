@@ -4,12 +4,13 @@ from .data_collector import MqttDataCollector, CollectorConfiguration
 from .mqtt_client import MqttClientPaho
 from .sql_client import MySqlClient
 from .sql_service import SQLService
+from .event_logging import setup_logger
 import json
 
+import sys
 from threading import Thread, Lock, Event
-from queue import Queue
-
 import time
+import os
 
 class iIOTService(ABC):
 
@@ -17,16 +18,40 @@ class iIOTService(ABC):
     def service_run(self):
         pass
 
+    @abstractmethod
+    def _create_folder_structure(self):
+        pass
 
 class IOTService(iIOTService):
 
     def __init__(self):
+
+        # Create folder structure
+        self._create_folder_structure()
+
+        # Create datalog
+        self.logger = setup_logger("IOT Service Log", "iot_service_logs/log")
+
+        # Create datalog
+        #logging.basicConfig(filename=f"iot_service_logs/log_{datetime.today().strftime('%Y%m%d')}.log",
+        #                    format='%(asctime)s %(levelname)-8s %(message)s',
+        #                    level=logging.INFO,
+        #                    datefmt='%Y-%m-%d %H:%M:%S')
+
         # Define SQL client
         self.sql_client = MySqlClient()
 
         # Define SQL service
         self.sql_service = SQLService(sql_client=self.sql_client)
-        self.sql_service.connect_service()
+
+        try:
+            self.sql_service.connect_service()
+            self.logger.info(f"Connecting to SQL server!")
+        except:
+            self.logger.info(f"Connecting to SQL failed! Stopping program execution")
+            sys.exit(1)
+
+        self.logger.info(f"Connected to sql!")
 
         self.collector_configuration = self.sql_service.read_iot_configuration()
         self.device_configuration = self.sql_service.read_device_configuration()
@@ -34,13 +59,14 @@ class IOTService(iIOTService):
 
         self.collector_service = DataCollectorService()
         for collector_conf in self.collector_configuration:
-            current_collector_topic_configuration = []
-            for i in self.topic_configuration:
-                if i["iot_configuration"] == collector_conf.configuration_id:
-                    current_collector_topic_configuration.append(i)
-            collector = MqttDataCollector(MqttClientPaho())
-            collector.set_configuration(collector_conf, current_collector_topic_configuration)
-            self.collector_service.add_collector(collector)
+            for device_conf in self.device_configuration:
+                current_collector_topic_configuration = []
+                for i in self.topic_configuration:
+                    if i["iot_configuration"] == collector_conf.configuration_id and i["device_id"] == device_conf.device_id:
+                        current_collector_topic_configuration.append(i)
+                collector = MqttDataCollector(MqttClientPaho())
+                collector.set_configuration(collector_conf, current_collector_topic_configuration, device_conf)
+                self.collector_service.add_collector(collector)
 
         self._stop_event = Event()
         self._mutex = Lock()
@@ -57,27 +83,28 @@ class IOTService(iIOTService):
         while 1:
             if not self._stop_event.is_set():
                 stop_flag = False
-                response = self.collector_service.get_data()
-                if response:
-                    topic = response["topic"]
-                    data = json.loads(response["data"])
-                    # Assign measurement to device
-                    for i in self.topic_configuration:
-                        if i["topic"] == topic:
-                            if i["topic_type"] == 1:  # Measurement
-                                measurement = {"device_id": i["device_id"], "topic_id": i["topic_id"]}
-                                # Parse measurement packet
-                                for m in data:
-                                    if m != "timestamp":  # TMP: Začasna rešitev, dodelati naprave da pošljejo zraven timestmp
-                                        measurement["measurement_type_id"] = m
-                                        measurement["value"] = data[m]
-                                        print(measurement)
+                data_packet = self.collector_service.get_data()
+                if data_packet:
+                    for response in data_packet:
+                        topic = response["topic"]
+                        data = json.loads(response["data"])
+                        # Assign measurement to device
+                        for i in self.topic_configuration:
+                            if i["topic"] == topic:
+                                if i["topic_type"] == 1:  # Measurement
+                                    measurement = {"device_id": i["device_id"], "topic_id": i["topic_id"]}
+                                    # Parse measurement packet
+                                    for m in data:
+                                        if m != "timestamp":  # TMP: Začasna rešitev, dodelati naprave da pošljejo zraven timestmp
+                                            measurement["measurement_type_id"] = m
+                                            measurement["value"] = data[m]
+                                            print(measurement)
 
-                                        self._mutex.acquire()
-                                        try:
-                                            self.sql_service.write_measurement_to_sql(measurement)
-                                        finally:
-                                            self._mutex.release()
+                                            self._mutex.acquire()
+                                            try:
+                                                self.sql_service.write_measurement_to_sql(measurement)
+                                            finally:
+                                                self._mutex.release()
             else:
                 if not stop_flag:
                     stop_flag = True
@@ -181,3 +208,8 @@ class IOTService(iIOTService):
             self.collector_service.add_collector(collector)
 
         self.collector_service.start_collection()
+
+    def _create_folder_structure(self):
+        # Create collector log folder
+        if not os.path.exists("iot_service_logs/"):
+            os.makedirs("iot_service_logs/")

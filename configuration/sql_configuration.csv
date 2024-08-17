@@ -1,2 +1,2 @@
 host,database,user,password
-localhost,test_db,remote_admin,admin
+localhost,iot_db,remote_admin,admin

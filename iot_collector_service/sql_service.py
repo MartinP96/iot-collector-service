@@ -49,12 +49,16 @@ class SQLService(ISQLService):
         self.sql_configuration = sql_configuration_dict
 
     def connect_service(self):
-        status = self.sql_client.connect_sql(
-                host=self.sql_configuration["host"],
-                database=self.sql_configuration["database"],
-                user=self.sql_configuration["user"],
-                password=self.sql_configuration["password"]
-                )
+
+        try:
+            status = self.sql_client.connect_sql(
+                    host=self.sql_configuration["host"],
+                    database=self.sql_configuration["database"],
+                    user=self.sql_configuration["user"],
+                    password=self.sql_configuration["password"]
+                    )
+        except:
+            raise
 
     def disconnect_service(self):
         self.sql_client.disconnect_sql()
@@ -69,7 +73,7 @@ class SQLService(ISQLService):
                 usr=conf["user"],
                 password=conf["password"],
                 ip_addr=conf["broker"],
-                port=conf["port"]
+                port=conf["port"],
             )
 
             configuration.append(tmp)

@@ -41,7 +41,7 @@ class MySqlClient(ISqlClient):
 
         except mysql.connector.Error as error:
             print("Failed to connect to server: {}".format(error))
-            return -1
+            raise
 
     def disconnect_sql(self):
         if self.connection.is_connected():
