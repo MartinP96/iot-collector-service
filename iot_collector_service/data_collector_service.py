@@ -1,9 +1,7 @@
 from .data_collector import IDataCollector
+from .event_logging import setup_logger
 from abc import ABC, abstractmethod
 import os
-import logging
-from datetime import datetime
-
 
 DATA_LOG_PATH = "collector_logs/"
 
@@ -38,17 +36,14 @@ class DataCollectorService(IDataCollectorService):
         self.create_folder_structure()
 
         # Create datalog
-        logging.basicConfig(filename=f"{DATA_LOG_PATH}log_{datetime.today().strftime('%Y%m%d')}.log",
-                            format='%(asctime)s %(levelname)-8s %(message)s',
-                            level=logging.INFO,
-                            datefmt='%Y-%m-%d %H:%M:%S')
+        self.logger = setup_logger("Collector Service Log", "collector_logs/log")
 
     def add_collector(self, new_collector: IDataCollector, collector_name=""):
         self.collectors_list.append(new_collector)
         self.create_folder_structure()
 
         # Write to log
-        logging.info(f"Adding collector to collector service: Device Id:{new_collector.device_settings.device_id}, "
+        self.logger.info(f"Adding collector to collector service: Device Id:{new_collector.device_settings.device_id}, "
                      f"Device name: {new_collector.device_settings.device_name}")
 
     def start_collection(self):
@@ -61,13 +56,13 @@ class DataCollectorService(IDataCollectorService):
                 print("Collector service start")
 
                 # Write to log
-                logging.info(f"Starting collection: Device Id:{collector.device_settings.device_id}, "
+                self.logger.info(f"Starting collection: Device Id:{collector.device_settings.device_id}, "
                              f"Device name: {collector.device_settings.device_name}")
             else:
                 print("Collector not connected!")
 
                 # Write to log
-                logging.info(f"Collector not connected!: Device Id:{collector.device_settings.device_id}, "
+                self.logger.info(f"Collector not connected!: Device Id:{collector.device_settings.device_id}, "
                              f"Device name: {collector.device_settings.device_name}")
 
     def resume_collection(self):
@@ -76,7 +71,7 @@ class DataCollectorService(IDataCollectorService):
             collector.subscribe_topic()
 
             # Write to log
-            logging.info(f"Resuming collection: Device Id:{collector.device_settings.device_id}, "
+            self.logger.info(f"Resuming collection: Device Id:{collector.device_settings.device_id}, "
                          f"Device name: {collector.device_settings.device_name}")
 
     def hold_collection(self):
@@ -86,7 +81,7 @@ class DataCollectorService(IDataCollectorService):
             print("Collector service held")
 
             # Write to log
-            logging.info(f"Holding collection: Device Id:{collector.device_settings.device_id}, "
+            self.logger.info(f"Holding collection: Device Id:{collector.device_settings.device_id}, "
                          f"Device name: {collector.device_settings.device_name}")
 
     def stop_collection(self):
@@ -98,7 +93,7 @@ class DataCollectorService(IDataCollectorService):
             print("Collector service stop")
 
             # Write to log
-            logging.info(f"Stopping collection: Device Id:{collector.device_settings.device_id}, "
+            self.logger.info(f"Stopping collection: Device Id:{collector.device_settings.device_id}, "
                          f"Device name: {collector.device_settings.device_name}")
 
         del collector

@@ -4,16 +4,13 @@ from .data_collector import MqttDataCollector, CollectorConfiguration
 from .mqtt_client import MqttClientPaho
 from .sql_client import MySqlClient
 from .sql_service import SQLService
+from .event_logging import setup_logger
 import json
 
 import sys
 from threading import Thread, Lock, Event
 import time
-import logging
 import os
-from datetime import datetime
-
-logger = logging.getLogger(__name__)
 
 class iIOTService(ABC):
 
@@ -33,10 +30,13 @@ class IOTService(iIOTService):
         self._create_folder_structure()
 
         # Create datalog
-        logging.basicConfig(filename=f"iot_service_logs/log_{datetime.today().strftime('%Y%m%d')}.log",
-                            format='%(asctime)s %(levelname)-8s %(message)s',
-                            level=logging.INFO,
-                            datefmt='%Y-%m-%d %H:%M:%S')
+        self.logger = setup_logger("IOT Service Log", "iot_service_logs/log")
+
+        # Create datalog
+        #logging.basicConfig(filename=f"iot_service_logs/log_{datetime.today().strftime('%Y%m%d')}.log",
+        #                    format='%(asctime)s %(levelname)-8s %(message)s',
+        #                    level=logging.INFO,
+        #                    datefmt='%Y-%m-%d %H:%M:%S')
 
         # Define SQL client
         self.sql_client = MySqlClient()
@@ -46,12 +46,12 @@ class IOTService(iIOTService):
 
         try:
             self.sql_service.connect_service()
-            logging.info(f"Connecting to SQL server!")
+            self.logger.info(f"Connecting to SQL server!")
         except:
-            logging.info(f"Connecting to SQL failed! Stopping program execution")
+            self.logger.info(f"Connecting to SQL failed! Stopping program execution")
             sys.exit(1)
 
-        logging.info(f"Connected to sql!")
+        self.logger.info(f"Connected to sql!")
 
         self.collector_configuration = self.sql_service.read_iot_configuration()
         self.device_configuration = self.sql_service.read_device_configuration()
