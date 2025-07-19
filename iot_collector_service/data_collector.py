@@ -1,3 +1,27 @@
+"""
+===============================================================================
+Module: data_collector.py
+Description:
+    This module defines an abstract interface `IDataCollector` and a concrete 
+    implementation `MqttDataCollector`, which handles MQTT-based data 
+    collection for IoT devices. It connects to an MQTT broker, subscribes 
+    to device topics, collects incoming messages, and publishes data as needed.
+
+    The collector is designed to run in background threads and uses 
+    queues to manage incoming and outgoing messages.
+
+Dependencies:
+    - mqtt_client.py (for IMqttClient)
+    - collector_configuration.py (CollectorConfiguration)
+    - device_configuration.py (DeviceConfiguration)
+    - threading, queue, json
+
+Author: [Martin P]
+
+===============================================================================
+"""
+
+
 from .mqtt_client import IMqttClient
 from .collector_configuration import CollectorConfiguration
 from .device_configuration import  DeviceConfiguration

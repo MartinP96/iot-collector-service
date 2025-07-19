@@ -1,0 +1,20 @@
+2025-07-19 10:43:58,944 | INFO     | 0046 | Adding collector to collector service: Device Id:1, Device name: Air Quality
+2025-07-19 10:43:58,944 | INFO     | 0046 | Adding collector to collector service: Device Id:2, Device name: Test device
+2025-07-19 10:43:58,944 | INFO     | 0046 | Adding collector to collector service: Device Id:3, Device name: Air Qaulity Test 1
+2025-07-19 10:43:58,944 | INFO     | 0046 | Adding collector to collector service: Device Id:4, Device name: Air Qaulity Test 2
+2025-07-19 10:43:58,944 | INFO     | 0046 | Adding collector to collector service: Device Id:5, Device name: Air Quality Test 3
+2025-07-19 10:43:58,950 | INFO     | 0059 | Starting collection: Device Id:1, Device name: Air Quality
+2025-07-19 10:43:58,951 | INFO     | 0059 | Starting collection: Device Id:2, Device name: Test device
+2025-07-19 10:43:58,953 | INFO     | 0059 | Starting collection: Device Id:3, Device name: Air Qaulity Test 1
+2025-07-19 10:43:58,954 | INFO     | 0059 | Starting collection: Device Id:4, Device name: Air Qaulity Test 2
+2025-07-19 10:43:58,955 | INFO     | 0059 | Starting collection: Device Id:5, Device name: Air Quality Test 3
+2025-07-19 18:07:03,932 | INFO     | 0046 | Adding collector to collector service: Device Id:1, Device name: Air Quality
+2025-07-19 18:07:03,933 | INFO     | 0046 | Adding collector to collector service: Device Id:2, Device name: Test device
+2025-07-19 18:07:03,933 | INFO     | 0046 | Adding collector to collector service: Device Id:3, Device name: Air Qaulity Test 1
+2025-07-19 18:07:03,933 | INFO     | 0046 | Adding collector to collector service: Device Id:4, Device name: Air Qaulity Test 2
+2025-07-19 18:07:03,933 | INFO     | 0046 | Adding collector to collector service: Device Id:5, Device name: Air Quality Test 3
+2025-07-19 18:07:03,937 | INFO     | 0059 | Starting collection: Device Id:1, Device name: Air Quality
+2025-07-19 18:07:03,938 | INFO     | 0059 | Starting collection: Device Id:2, Device name: Test device
+2025-07-19 18:07:03,939 | INFO     | 0059 | Starting collection: Device Id:3, Device name: Air Qaulity Test 1
+2025-07-19 18:07:03,940 | INFO     | 0059 | Starting collection: Device Id:4, Device name: Air Qaulity Test 2
+2025-07-19 18:07:03,941 | INFO     | 0059 | Starting collection: Device Id:5, Device name: Air Quality Test 3

@@ -7,5 +7,3 @@ from .iot_service import IOTService
 def run_service():
     service = IOTService()
     service.service_run()
-
-

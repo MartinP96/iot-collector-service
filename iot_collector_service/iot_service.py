@@ -1,3 +1,30 @@
+"""
+===============================================================================
+Module: iot_service.py
+Description:
+    This module implements the `IOTService` class, which serves as the core 
+    runtime of an IoT data collection system. It connects to a MySQL database, 
+    reads device and topic configurations, manages MQTT data collectors, 
+    handles service commands (e.g., start/stop collection, write parameters), 
+    and writes measurements to SQL.
+
+    Key Responsibilities:
+    - Initialize and run the service loop in background threads.
+    - Manage collector configuration and MQTT connections.
+    - Process incoming MQTT data and convert to structured measurements.
+    - Execute control commands from SQL (like start, stop, reconfigure).
+
+Dependencies:
+    - SQL Client (`MySqlClient`) and SQL Service (`SQLService`)
+    - MQTT Client (`MqttClientPaho`)
+    - DataCollectorService, MqttDataCollector
+    - Logging (via `setup_logger`)
+    - Standard libraries: `threading`, `json`, `sys`, `os`, `time`
+
+Author: [Martin P]
+===============================================================================
+"""
+
 from abc import ABC, abstractmethod
 from .data_collector_service import DataCollectorService
 from .data_collector import MqttDataCollector, CollectorConfiguration
@@ -13,30 +40,36 @@ import time
 import os
 
 class iIOTService(ABC):
-
+    """
+    Abstract base class for IoT services.
+    Defines the interface for service execution and setup routines.
+    """
     @abstractmethod
     def service_run(self):
+        """Starts the IoT service runtime."""
         pass
 
     @abstractmethod
     def _create_folder_structure(self):
+        """Initializes required folder structures."""
         pass
 
 class IOTService(iIOTService):
-
+    """
+    Implements the core IoT data collection service logic.
+    Manages MQTT collectors, SQL interactions, and threaded execution of service and data collection.
+    """
     def __init__(self):
-
+        """
+        Constructor that initializes the IoT service.
+        Sets up logger, database connection, reads configuration,
+        creates collectors, and prepares background threads.
+        """
         # Create folder structure
         self._create_folder_structure()
 
         # Create datalog
         self.logger = setup_logger("IOT Service Log", "iot_service_logs/log")
-
-        # Create datalog
-        #logging.basicConfig(filename=f"iot_service_logs/log_{datetime.today().strftime('%Y%m%d')}.log",
-        #                    format='%(asctime)s %(levelname)-8s %(message)s',
-        #                    level=logging.INFO,
-        #                    datefmt='%Y-%m-%d %H:%M:%S')
 
         # Define SQL client
         self.sql_client = MySqlClient()
@@ -75,9 +108,17 @@ class IOTService(iIOTService):
         self._service_main_thread = Thread(target=self._service_main_thread_fun)
 
     def service_run(self):
+        """
+        Starts the main service thread.
+        """
         self._service_main_thread.start()
 
     def _measurement_collection_thread_fun(self):
+        """
+        Thread function that continuously collects and stores measurements from MQTT.
+        Parses data and writes measurements to the SQL database.
+        Suspends collection on stop signal.
+        """
         self.collector_service.start_collection()
         stop_flag = False
         while 1:
@@ -112,25 +153,11 @@ class IOTService(iIOTService):
                 print("Collection thread stopped!")
                 time.sleep(1)
 
-    '''
-    def _data_publish_thread_fun(self):
-        tmp = 0
-        while 1:
-            data = {
-                "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "val": tmp
-            }
-            data_packet = {
-                "topic": "IOT_System/service/beat",
-                "data": data
-            }
-            # self.collector_service.publish_data(data_packet)
-            tmp += 1
-            time.sleep(1)
-    '''
-
     def _service_main_thread_fun(self):
-        # Start secondary threads
+        """
+        Thread function that continuously reads and processes control commands from SQL.
+        Supports commands like start, stop, write parameters, and reload configuration.
+        """
         self._measurement_collection_thread.start()
 
         try:
@@ -170,7 +197,10 @@ class IOTService(iIOTService):
             self._service_main_thread.join()
 
     def _cmd_write_parameters(self, cmd):
-
+        """
+        Handles the command to write device parameters.
+        Publishes parameter packets via MQTT to respective topics.
+        """
         # Get parameters from SQL
         parameters = self.sql_service.read_parameters_from_sql(cmd["device_id"])
 
@@ -190,6 +220,10 @@ class IOTService(iIOTService):
             self.collector_service.publish_data(data_packet)
 
     def _cmd_get_new_configuration(self):
+        """
+        Handles the command to reload the IoT configuration from SQL.
+        Stops current collection, creates new collectors, and resumes collection.
+        """
         print("Getting new configuration")
         self.collector_configuration = self.sql_service.read_iot_configuration()
         self.device_configuration = self.sql_service.read_device_configuration()
@@ -210,6 +244,9 @@ class IOTService(iIOTService):
         self.collector_service.start_collection()
 
     def _create_folder_structure(self):
+        """
+        Creates the log folder structure required by the service.
+        """
         # Create collector log folder
         if not os.path.exists("iot_service_logs/"):
             os.makedirs("iot_service_logs/")

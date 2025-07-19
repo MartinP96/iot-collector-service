@@ -1,0 +1,10 @@
+2024-12-25 16:12:47,034 | INFO     | 0046 | Adding collector to collector service: Device Id:1, Device name: Air Quality
+2024-12-25 16:12:47,034 | INFO     | 0046 | Adding collector to collector service: Device Id:2, Device name: Test device
+2024-12-25 16:12:47,034 | INFO     | 0046 | Adding collector to collector service: Device Id:3, Device name: Air Qaulity Test 1
+2024-12-25 16:12:47,034 | INFO     | 0046 | Adding collector to collector service: Device Id:4, Device name: Air Qaulity Test 2
+2024-12-25 16:12:47,034 | INFO     | 0046 | Adding collector to collector service: Device Id:5, Device name: Air Quality Test 3
+2024-12-25 16:12:47,039 | INFO     | 0059 | Starting collection: Device Id:1, Device name: Air Quality
+2024-12-25 16:12:47,042 | INFO     | 0059 | Starting collection: Device Id:2, Device name: Test device
+2024-12-25 16:12:47,051 | INFO     | 0059 | Starting collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-12-25 16:12:47,052 | INFO     | 0059 | Starting collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-12-25 16:12:47,057 | INFO     | 0059 | Starting collection: Device Id:5, Device name: Air Quality Test 3

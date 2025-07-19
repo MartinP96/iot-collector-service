@@ -1,0 +1,355 @@
+2024-08-17 10:36:50,992 | INFO     | 0046 | Adding collector to collector service: Device Id:1, Device name: Air Quality
+2024-08-17 10:36:50,992 | INFO     | 0046 | Adding collector to collector service: Device Id:2, Device name: Test device
+2024-08-17 10:36:50,992 | INFO     | 0046 | Adding collector to collector service: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:36:50,992 | INFO     | 0046 | Adding collector to collector service: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:36:50,992 | INFO     | 0046 | Adding collector to collector service: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:36:50,997 | INFO     | 0059 | Starting collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:36:50,998 | INFO     | 0059 | Starting collection: Device Id:2, Device name: Test device
+2024-08-17 10:36:50,999 | INFO     | 0059 | Starting collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:36:50,999 | INFO     | 0059 | Starting collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:36:51,001 | INFO     | 0059 | Starting collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:45:07,187 | INFO     | 0046 | Adding collector to collector service: Device Id:1, Device name: Air Quality
+2024-08-17 10:45:07,187 | INFO     | 0046 | Adding collector to collector service: Device Id:2, Device name: Test device
+2024-08-17 10:45:07,188 | INFO     | 0046 | Adding collector to collector service: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:45:07,188 | INFO     | 0046 | Adding collector to collector service: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:45:07,188 | INFO     | 0046 | Adding collector to collector service: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:45:07,191 | INFO     | 0059 | Starting collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:45:07,192 | INFO     | 0059 | Starting collection: Device Id:2, Device name: Test device
+2024-08-17 10:45:07,193 | INFO     | 0059 | Starting collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:45:07,193 | INFO     | 0059 | Starting collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:45:07,194 | INFO     | 0059 | Starting collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:48:32,602 | INFO     | 0046 | Adding collector to collector service: Device Id:1, Device name: Air Quality
+2024-08-17 10:48:32,602 | INFO     | 0046 | Adding collector to collector service: Device Id:2, Device name: Test device
+2024-08-17 10:48:32,602 | INFO     | 0046 | Adding collector to collector service: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:48:32,603 | INFO     | 0046 | Adding collector to collector service: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:48:32,603 | INFO     | 0046 | Adding collector to collector service: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:48:32,612 | INFO     | 0059 | Starting collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:48:32,613 | INFO     | 0059 | Starting collection: Device Id:2, Device name: Test device
+2024-08-17 10:48:32,614 | INFO     | 0059 | Starting collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:48:32,627 | INFO     | 0059 | Starting collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:48:32,629 | INFO     | 0059 | Starting collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:23,745 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:23,745 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:23,745 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:23,745 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:23,745 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:24,747 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:24,748 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:24,748 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:24,748 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:24,748 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:25,750 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:25,750 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:25,750 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:25,750 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:25,751 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:26,752 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:26,752 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:26,752 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:26,752 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:26,752 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:27,754 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:27,754 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:27,754 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:27,754 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:27,754 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:28,755 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:28,756 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:28,756 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:28,756 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:28,756 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:29,758 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:29,758 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:29,758 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:29,758 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:29,758 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:30,759 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:30,759 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:30,759 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:30,759 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:30,759 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:31,760 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:31,761 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:31,761 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:31,761 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:31,761 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:32,761 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:32,762 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:32,762 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:32,762 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:32,762 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:33,764 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:33,764 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:33,764 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:33,764 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:33,764 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:34,766 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:34,767 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:34,767 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:34,767 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:34,767 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:35,769 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:35,769 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:35,769 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:35,769 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:35,769 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:36,771 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:36,772 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:36,772 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:36,772 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:36,772 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:37,773 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:37,774 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:37,774 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:37,774 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:37,774 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:38,775 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:38,775 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:38,776 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:38,776 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:38,776 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:39,776 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:39,777 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:39,777 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:39,777 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:39,777 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:40,779 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:40,780 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:40,780 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:40,780 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:40,780 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:41,782 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:41,782 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:41,782 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:41,782 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:41,782 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:42,783 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:42,784 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:42,784 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:42,784 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:42,784 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:43,786 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:43,786 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:43,786 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:43,786 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:43,786 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:44,787 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:44,787 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:44,787 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:44,787 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:44,788 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:45,789 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:45,789 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:45,790 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:45,790 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:45,790 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:46,792 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:46,792 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:46,792 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:46,792 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:46,792 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:47,794 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:47,794 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:47,794 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:47,794 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:47,794 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:48,795 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:48,795 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:48,796 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:48,796 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:48,796 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:49,797 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:49,798 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:49,799 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:49,799 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:49,799 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:50,800 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:50,800 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:50,800 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:50,800 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:50,801 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:51,804 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:51,805 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:51,805 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:51,805 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:51,805 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:52,806 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:52,807 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:52,807 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:52,807 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:52,807 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:53,809 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:53,809 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:53,809 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:53,810 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:53,810 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:54,810 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:54,810 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:54,810 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:54,811 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:54,811 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:55,812 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:55,812 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:55,812 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:55,812 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:55,813 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:56,814 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:56,814 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:56,814 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:56,815 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:56,815 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:57,816 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:57,816 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:57,816 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:57,817 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:57,817 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:58,820 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:58,820 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:58,820 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:58,820 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:58,821 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:49:59,824 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:49:59,824 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:49:59,824 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:49:59,824 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:49:59,824 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:00,826 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:00,826 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:00,827 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:00,827 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:00,827 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:01,827 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:01,827 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:01,827 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:01,827 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:01,828 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:02,829 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:02,829 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:02,829 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:02,829 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:02,829 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:03,830 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:03,830 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:03,830 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:03,831 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:03,831 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:04,832 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:04,832 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:04,832 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:04,832 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:04,832 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:05,833 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:05,833 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:05,833 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:05,834 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:05,834 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:06,835 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:06,835 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:06,835 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:06,835 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:06,835 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:07,837 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:07,837 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:07,838 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:07,838 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:07,838 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:08,839 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:08,839 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:08,840 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:08,840 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:08,840 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:09,841 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:09,842 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:09,842 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:09,842 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:09,842 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:10,843 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:10,843 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:10,843 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:10,843 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:10,843 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:11,844 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:11,845 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:11,845 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:11,845 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:11,845 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:12,846 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:12,847 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:12,847 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:12,847 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:12,847 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:13,848 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:13,848 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:13,848 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:13,848 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:13,848 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:14,851 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:14,851 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:14,851 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:14,851 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:14,851 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:15,852 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:15,852 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:15,852 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:15,852 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:15,852 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:16,867 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:16,867 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:16,867 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:16,867 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:16,867 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:17,869 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:17,869 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:17,869 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:17,869 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:17,869 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:18,871 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:18,871 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:18,871 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:18,872 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:18,872 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:19,874 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:19,874 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:19,875 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:19,875 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:19,875 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:20,877 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:20,877 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:20,877 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:20,877 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:20,877 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:21,879 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:21,880 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:21,880 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:21,880 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:21,880 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:22,880 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:22,881 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:22,881 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:22,881 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:22,882 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:23,884 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:23,884 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:23,884 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:23,884 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:23,884 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:24,886 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:24,887 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:24,887 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:24,887 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:24,887 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:25,888 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:25,888 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:25,889 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:25,889 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:25,889 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:26,890 | INFO     | 0084 | Holding collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:26,890 | INFO     | 0084 | Holding collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:26,890 | INFO     | 0084 | Holding collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:26,890 | INFO     | 0084 | Holding collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:26,890 | INFO     | 0084 | Holding collection: Device Id:5, Device name: Air Quality Test 3
+2024-08-17 10:50:27,869 | INFO     | 0074 | Resuming collection: Device Id:1, Device name: Air Quality
+2024-08-17 10:50:27,869 | INFO     | 0074 | Resuming collection: Device Id:2, Device name: Test device
+2024-08-17 10:50:27,870 | INFO     | 0074 | Resuming collection: Device Id:3, Device name: Air Qaulity Test 1
+2024-08-17 10:50:27,870 | INFO     | 0074 | Resuming collection: Device Id:4, Device name: Air Qaulity Test 2
+2024-08-17 10:50:27,870 | INFO     | 0074 | Resuming collection: Device Id:5, Device name: Air Quality Test 3
