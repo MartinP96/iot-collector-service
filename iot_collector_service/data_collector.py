@@ -1,5 +1,30 @@
+"""
+===============================================================================
+Module: data_collector.py
+Description:
+    This module defines an abstract interface `IDataCollector` and a concrete 
+    implementation `MqttDataCollector`, which handles MQTT-based data 
+    collection for IoT devices. It connects to an MQTT broker, subscribes 
+    to device topics, collects incoming messages, and publishes data as needed.
+
+    The collector is designed to run in background threads and uses 
+    queues to manage incoming and outgoing messages.
+
+Dependencies:
+    - mqtt_client.py (for IMqttClient)
+    - collector_configuration.py (CollectorConfiguration)
+    - device_configuration.py (DeviceConfiguration)
+    - threading, queue, json
+
+Author: [Martin P]
+
+===============================================================================
+"""
+
+
 from .mqtt_client import IMqttClient
 from .collector_configuration import CollectorConfiguration
+from .device_configuration import  DeviceConfiguration
 
 from abc import ABC, abstractmethod
 from threading import Thread, Event
@@ -25,7 +50,8 @@ class IDataCollector(ABC):
         pass
 
     @abstractmethod
-    def set_configuration(self, collector_conf: CollectorConfiguration, device_configuration: list):
+    def set_configuration(self, collector_conf: CollectorConfiguration, device_topic_configuration: list,
+                          device_configuration: DeviceConfiguration):
         pass
 
     @abstractmethod
@@ -38,6 +64,7 @@ class MqttDataCollector(IDataCollector):
         self.client = client
         self.collector_configuration = None
         self.device_configuration = None
+        self.device_settings = None
 
         self._thread_stop = False
         self.data_queue = Queue(maxsize=10)
@@ -87,16 +114,19 @@ class MqttDataCollector(IDataCollector):
         self._stop_event.set()
         self._stop_event2.set()
 
-    def set_configuration(self, collector_conf: CollectorConfiguration, device_configuration: list):
+    def set_configuration(self, collector_conf: CollectorConfiguration, device_topic_configuration: list,
+                          device_configuration: DeviceConfiguration):
         self.collector_configuration = collector_conf
-        self.device_configuration = device_configuration
+        self.device_configuration = device_topic_configuration
+        self.device_settings = device_configuration
 
     def get_data(self):
         data = {}
         try:
-            data = self.data_queue.get(timeout=10)
+            data = self.data_queue.get(timeout=0.1)
         except:
-            print("No data received")
+            # print("No data received")
+            pass
         return data
 
     def publish_data(self, data):

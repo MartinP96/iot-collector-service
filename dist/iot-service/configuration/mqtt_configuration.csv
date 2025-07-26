@@ -1,0 +1,2 @@
+broker,port,user,password
+localhost,1883,admin,admin
